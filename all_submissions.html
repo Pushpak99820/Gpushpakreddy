@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Submissions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8e1;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        th, td {
+            border: 1px solid #1565c0;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #1565c0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>All Submitted Entries</h1>
+
+    <table id="submissionsTable">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Gender</th>
+        </tr>
+    </table>
+
+    <script>
+        const table = document.getElementById('submissionsTable');
+        const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
+
+        submissions.forEach((entry, index) => {
+            const row = table.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+            const cell4 = row.insertCell(3);
+
+            cell1.textContent = index + 1;
+            cell2.textContent = entry.name;
+            cell3.textContent = entry.phone;
+            cell4.textContent = entry.gender;
+        });
+    </script>
+
+</body>
+</html>

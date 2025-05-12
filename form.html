@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff8e1;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="tel"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        .gender-options {
+            margin-bottom: 15px;
+        }
+        button, .view-button {
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px 5px 0 0;
+            text-decoration: none;
+            display: inline-block;
+        }
+        button:hover, .view-button:hover {
+            background-color: #0d47a1;
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Basic Info Form</h1>
+
+    <form id="infoForm">
+        <label for="name">Name (alphabets only):</label>
+        <input type="text" id="name" name="name" pattern="[A-Za-z ]+" required>
+
+        <label for="phone">Phone Number (numbers only):</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]+" required>
+
+        <label>Gender:</label>
+        <div class="gender-options">
+            <input type="radio" id="male" name="gender" value="Male" required>
+            <label for="male" style="display:inline;">Male</label>
+            <input type="radio" id="female" name="gender" value="Female">
+            <label for="female" style="display:inline;">Female</label>
+            <input type="radio" id="other" name="gender" value="Other">
+            <label for="other" style="display:inline;">Other</label>
+        </div>
+
+        <div class="center">
+            <button type="submit">Submit</button>
+            <a href="file:///C:/Users/gpush/Documents/GPR%231/Persnol/all%20submissions%20.html" class="view-button" target="_blank">View All Submissions</a>
+            <a href="file:///C:/Users/gpush/Documents/GPR%231/Persnol/all%20submissions%20.html" class="view-button" target="_blank">Submissions</a>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById('infoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+
+            const newEntry = { name, phone, gender };
+
+            // Get existing submissions from localStorage
+            let submissions = JSON.parse(localStorage.getItem('submissions')) || [];
+            submissions.push(newEntry);
+
+            // Save back to localStorage
+            localStorage.setItem('submissions', JSON.stringify(submissions));
+
+            // Redirect to file:///C:/Users/gpush/Documents/GPR%231/Persnol/records%20.html (single entry view)
+            const query = `file:///C:/Users/gpush/Documents/GPR%231/Persnol/records%20.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&gender=${encodeURIComponent(gender)}`;
+            window.open(query, '_blank');
+        });
+    </script>
+
+</body>
+</html>
+
+
